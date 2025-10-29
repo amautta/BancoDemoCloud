@@ -1068,7 +1068,10 @@
   border-radius: var(--border-radius-full);
   justify-content: center;
 }
- 
+/* Ajuste para evitar superposición con el launcher de Genesys */
+.footer-back-to-top {
+  bottom: calc(var(--spacing-xl) + 80px); /* 🔹 desplaza hacia arriba aprox. 80px */
+}
 .footer-decorative-line {
   top: 0;
   left: 0;
