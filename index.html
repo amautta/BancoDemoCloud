@@ -2581,5 +2581,40 @@
     deploymentId: '66de33b7-d8aa-4c62-b5ac-7cdfbba36789'
   });
 </script>
+    <script>
+  // Asegura que el DOM está listo
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('btn-creditos-chat');
+    if (!btn) return;
+
+    // Por si exportas nuevas versiones y cambia el texto
+    btn.textContent = 'Chatea con uno de nuestros ejecutivos';
+    btn.setAttribute('aria-label', 'Chatea con uno de nuestros ejecutivos');
+
+    btn.addEventListener('click', function () {
+      if (window.Genesys) {
+        // Abre la ventana de Messenger (Web Messaging)
+        window.Genesys('command', 'Messenger.open')
+          .catch(function () {
+            // Si ya estaba abierta, la promesa puede rechazar: no pasa nada.
+            // (Opcional: podrías intentar un fallback o simplemente ignorar)
+          });
+      } else {
+        // Si el bootstrap aún no cargó, esperamos un poco y reintentamos
+        var tries = 0;
+        var iv = setInterval(function () {
+          tries++;
+          if (window.Genesys) {
+            clearInterval(iv);
+            window.Genesys('command', 'Messenger.open').catch(function(){});
+          } else if (tries > 20) {
+            clearInterval(iv);
+            console.warn('Genesys Messenger no está disponible todavía.');
+          }
+        }, 150);
+      }
+    });
+  });
+</script>
   </body>
 </html>
