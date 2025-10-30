@@ -1072,6 +1072,11 @@
 .footer-back-to-top {
   bottom: calc(var(--spacing-xl) + 80px); /* 🔹 desplaza hacia arriba aprox. 80px */
 }
+@media (max-width: 768px) {
+  .footer-back-to-top {
+    bottom: calc(var(--spacing-xl) + 100px);
+  }
+}
 .footer-decorative-line {
   top: 0;
   left: 0;
